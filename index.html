@@ -1,0 +1,1525 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0B0B0B" />
+  <title>ÄRUZ — Hair Artist · Anatomik Saç Tasarım · İstanbul</title>
+  <meta name="description" content="ÄRUZ — Anatomik saç tasarımı ve sanatsal kesim ustalığı. İstanbul'da randevu için tıklayın." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,30..100&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper:  '#F2EEE5',
+            paper2: '#E9E3D6',
+            ink:    '#0B0B0B',
+            ink2:   '#1A1A1A',
+            muted:  '#6B655C',
+            mute2:  '#9A9388',
+            line:   'rgba(11,11,11,0.10)',
+            brass:  '#9C7A3C',
+            brass2: '#C9A463',
+          },
+          fontFamily: {
+            display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
+            sans:    ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          letterSpacing: { tightest: '-0.04em' },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{
+      --ease-out: cubic-bezier(.22,1,.36,1);
+      --ease-in-out: cubic-bezier(.65,0,.35,1);
+    }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family: 'Inter', system-ui, sans-serif;
+      background:#F2EEE5;
+      color:#0B0B0B;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      overflow-x:hidden;
+    }
+    .font-display{ font-family: 'Fraunces', serif; font-variation-settings: 'opsz' 144, 'SOFT' 30; }
+    .font-display-text{ font-family: 'Fraunces', serif; font-variation-settings: 'opsz' 14, 'SOFT' 50; }
+
+    /* ——— Selection ——— */
+    ::selection{ background:#0B0B0B; color:#F2EEE5; }
+
+    /* ——— Custom cursor (desktop only) ——— */
+    @media (hover:hover) and (pointer:fine){
+      body{ cursor:none; }
+      a,button,[data-cursor]{ cursor:none; }
+      .cursor{ position:fixed; top:0; left:0; width:8px; height:8px; border-radius:99px; background:#0B0B0B; pointer-events:none; z-index:9999;
+        transform:translate(-50%,-50%); transition:width .3s var(--ease-out), height .3s var(--ease-out), background .3s var(--ease-out); mix-blend-mode:difference; }
+      .cursor.is-large{ width:48px; height:48px; background:#F2EEE5; }
+      .cursor-ring{ position:fixed; top:0; left:0; width:32px; height:32px; border:1px solid rgba(11,11,11,.35); border-radius:99px; pointer-events:none; z-index:9998;
+        transform:translate(-50%,-50%); transition:transform .25s var(--ease-out), opacity .2s var(--ease-out); }
+    }
+    @media (hover:none){ .cursor, .cursor-ring{ display:none; } }
+
+    /* ——— Reveal animation framework ——— */
+    .reveal{ opacity:0; transform:translateY(28px); transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: var(--rd, 0ms); }
+    .reveal.in{ opacity:1; transform:none; }
+
+    .reveal-mask{ display:inline-block; overflow:hidden; vertical-align:bottom; }
+    .reveal-mask > span{ display:inline-block; transform:translateY(110%); transition: transform 1000ms var(--ease-out); transition-delay: var(--rd, 0ms); will-change:transform; }
+    .reveal-mask.in > span{ transform:none; }
+
+    .reveal-clip{ -webkit-clip-path:inset(0 100% 0 0); clip-path:inset(0 100% 0 0); transition:clip-path 1100ms var(--ease-out), -webkit-clip-path 1100ms var(--ease-out); transition-delay: var(--rd, 0ms); }
+    .reveal-clip.in{ -webkit-clip-path:inset(0 0% 0 0); clip-path:inset(0 0% 0 0); }
+
+    .reveal-scale{ transform: scale(1.08); filter:saturate(.85) brightness(.92); opacity:0; transition: transform 1400ms var(--ease-out), opacity 1000ms var(--ease-out), filter 1400ms var(--ease-out); }
+    .reveal-scale.in{ transform: scale(1); opacity:1; filter:none; }
+
+    /* ——— Hero ——— */
+    .hero-grid{ background-image:
+        linear-gradient(to right, rgba(11,11,11,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(11,11,11,.06) 1px, transparent 1px);
+      background-size: 96px 96px;
+    }
+    .hero-vignette{
+      background: radial-gradient(120% 80% at 50% 60%, transparent 40%, rgba(11,11,11,.55) 100%);
+    }
+    @keyframes kenburns { 0%{ transform: scale(1.0) translateY(0); } 100%{ transform: scale(1.12) translateY(-2%); } }
+    .kenburns{ animation: kenburns 16s var(--ease-in-out) infinite alternate; }
+
+    /* ——— Marquee ——— */
+    @keyframes marquee {
+      0%   { transform: translate3d(0,0,0); }
+      100% { transform: translate3d(-50%,0,0); }
+    }
+    .marquee{ display:flex; width:max-content; animation: marquee 38s linear infinite; }
+    .marquee-track{ display:flex; align-items:center; gap:3rem; padding-right:3rem; }
+
+    /* ——— Decorative scissor SVG dot ——— */
+    .ornament{ width:14px; height:14px; display:inline-block; border-radius:99px; background:#9C7A3C; }
+
+    /* ——— Section divider ——— */
+    .rule{ height:1px; background:rgba(11,11,11,.16); width:100%; }
+
+    /* ——— Service row ——— */
+    .service-row{ position:relative; }
+    .service-row::before{
+      content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+      background:rgba(11,11,11,.12); transform-origin:left; transform: scaleX(1);
+    }
+    .service-row:hover .service-row__title{ transform: translateX(8px); }
+    .service-row:hover .service-row__price{ color:#9C7A3C; }
+    .service-row__title, .service-row__price{ transition: transform .55s var(--ease-out), color .35s var(--ease-out); }
+    .service-row__hover{ position:absolute; left:0; right:0; top:0; bottom:0; background:#0B0B0B; transform: scaleY(0); transform-origin: bottom; transition: transform .55s var(--ease-out); z-index:0; }
+    .service-row:hover .service-row__hover{ transform: scaleY(1); transform-origin: top; }
+    .service-row:hover .service-row__inner{ color:#F2EEE5; }
+    .service-row__inner{ position:relative; z-index:1; transition: color .4s var(--ease-out); }
+
+    /* ——— Master card ——— */
+    .master-card{ position:relative; overflow:hidden; }
+    .master-img{ transition: transform 1.4s var(--ease-out), filter 1.4s var(--ease-out); filter: grayscale(40%) contrast(1.02); }
+    .master-card:hover .master-img{ transform: scale(1.06); filter: grayscale(0%) contrast(1.05); }
+    .master-overlay{ position:absolute; inset:auto 0 0 0; padding:24px; background:linear-gradient(to top, rgba(11,11,11,.85), rgba(11,11,11,0)); color:#F2EEE5; transform: translateY(20%); opacity:.0; transition: transform .7s var(--ease-out), opacity .5s var(--ease-out); }
+    .master-card:hover .master-overlay{ transform: translateY(0); opacity:1; }
+
+    /* ——— Underline draw ——— */
+    .ul-draw{ position:relative; }
+    .ul-draw::after{
+      content:""; position:absolute; left:0; bottom:-3px; width:100%; height:1px; background:currentColor;
+      transform: scaleX(0); transform-origin: right;
+      transition: transform .6s var(--ease-out);
+    }
+    .ul-draw:hover::after{ transform: scaleX(1); transform-origin: left; }
+
+    /* ——— Primary button ——— */
+    .btn-primary{ position:relative; display:inline-flex; align-items:center; gap:.75rem; padding:18px 28px; background:#0B0B0B; color:#F2EEE5; border-radius:999px; overflow:hidden; isolation:isolate; }
+    .btn-primary::before{ content:""; position:absolute; inset:0; background:#9C7A3C; transform: translateY(101%); transition: transform .6s var(--ease-out); z-index:-1; }
+    .btn-primary:hover::before{ transform: translateY(0); }
+    .btn-primary .arrow{ transition: transform .5s var(--ease-out); }
+    .btn-primary:hover .arrow{ transform: translateX(6px); }
+
+    .btn-ghost{ position:relative; display:inline-flex; align-items:center; gap:.75rem; padding:18px 28px; border-radius:999px; border:1px solid rgba(11,11,11,.25); transition: border-color .35s var(--ease-out), background .35s var(--ease-out), color .35s var(--ease-out); }
+    .btn-ghost:hover{ border-color:#0B0B0B; background:#0B0B0B; color:#F2EEE5; }
+
+    /* ——— Booking flow ——— */
+    .booking-step{ display:none; opacity:0; transform: translateY(16px); transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }
+    .booking-step.active{ display:block; }
+    .booking-step.in{ opacity:1; transform: none; }
+
+    .pick-card{
+      position:relative; border:1px solid rgba(11,11,11,.14); border-radius:18px; padding:22px;
+      background:#F2EEE5; transition: border-color .35s var(--ease-out), transform .5s var(--ease-out), background .35s var(--ease-out);
+    }
+    .pick-card:hover{ border-color:#0B0B0B; transform: translateY(-2px); }
+    .pick-card.selected{ border-color:#0B0B0B; background:#0B0B0B; color:#F2EEE5; }
+    .pick-card.selected .pick-meta{ color:#9C7A3C; }
+    .pick-card.selected .pick-check{ opacity:1; transform: scale(1); }
+    .pick-check{
+      position:absolute; top:14px; right:14px; width:26px; height:26px; border-radius:99px; background:#9C7A3C; color:#0B0B0B;
+      display:grid; place-items:center; opacity:0; transform: scale(.7); transition: opacity .4s var(--ease-out), transform .4s var(--ease-out);
+    }
+
+    .day-cell{
+      aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(11,11,11,.08); border-radius:12px; font-variant-numeric: tabular-nums;
+      transition: border-color .25s var(--ease-out), background .25s var(--ease-out), color .25s var(--ease-out);
+      font-family: 'JetBrains Mono', monospace; font-size:14px;
+    }
+    .day-cell:not(.disabled):hover{ border-color:#0B0B0B; }
+    .day-cell.disabled{ color: rgba(11,11,11,.25); cursor: not-allowed; border-color: transparent; }
+    .day-cell.selected{ background:#0B0B0B; color:#F2EEE5; border-color:#0B0B0B; }
+
+    .slot{
+      padding:14px 6px; border:1px solid rgba(11,11,11,.12); border-radius:12px; text-align:center;
+      font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:.04em;
+      transition: border-color .25s var(--ease-out), background .25s var(--ease-out), color .25s var(--ease-out);
+    }
+    .slot:not(.disabled):hover{ border-color:#0B0B0B; }
+    .slot.disabled{ color:rgba(11,11,11,.25); text-decoration: line-through; cursor:not-allowed; }
+    .slot.selected{ background:#0B0B0B; color:#F2EEE5; border-color:#0B0B0B; }
+
+    .field{ width:100%; padding:18px 0 12px; background:transparent; border:0; border-bottom:1px solid rgba(11,11,11,.2); font-size:18px; outline:none; transition:border-color .35s var(--ease-out); }
+    .field:focus{ border-color:#0B0B0B; }
+    .field-row label{ font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#6B655C; }
+
+    /* ——— Step indicator ——— */
+    .step-dot{ height:2px; background:rgba(11,11,11,.18); flex:1; position:relative; overflow:hidden; }
+    .step-dot::after{ content:""; position:absolute; inset:0; background:#0B0B0B; transform: scaleX(0); transform-origin:left; transition: transform .6s var(--ease-out); }
+    .step-dot.done::after{ transform: scaleX(1); }
+    .step-dot.current::after{ transform: scaleX(.5); }
+
+    /* ——— Gallery hover ——— */
+    .gx{ overflow:hidden; }
+    .gx img{ transition: transform 1.4s var(--ease-out); will-change: transform; }
+    .gx:hover img{ transform: scale(1.06); }
+
+    /* ——— Floating nav ——— */
+    .nav-pill{ backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(242,238,229,.72); border:1px solid rgba(11,11,11,.08); }
+    .nav-pill.dark{ background: rgba(11,11,11,.78); color:#F2EEE5; border-color: rgba(255,255,255,.08); }
+
+    /* ——— Hero typography refinement ——— */
+    .display-xl{
+      font-family:'Fraunces', serif;
+      font-variation-settings:'opsz' 144, 'SOFT' 30, 'wght' 380;
+      letter-spacing:-0.045em; line-height:.86;
+    }
+    .display-xl em{ font-style:italic; font-variation-settings:'opsz' 144, 'SOFT' 100, 'wght' 320; color:#9C7A3C; }
+    .eyebrow{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:#6B655C; }
+
+    /* ——— Confirmation ——— */
+    .confetti-mark{ animation: pop .6s var(--ease-out) both; }
+    @keyframes pop { 0%{ transform:scale(.4); opacity:0; } 60%{ transform: scale(1.1); opacity:1; } 100%{ transform: scale(1); } }
+
+    /* ——— Number counter ——— */
+    .stat-num{ font-feature-settings: "tnum"; }
+
+    /* ——— Parallax wrapper ——— */
+    .parallax{ will-change: transform; }
+
+    /* ——— Logo styling ——— */
+    .ar-logo{ font-family:'Fraunces', serif; font-variation-settings:'opsz' 144, 'wght' 550; letter-spacing:.05em; }
+    .ar-logo .dot{ display:inline-block; transform: translateY(-.6em); width:.25em; height:.25em; background:#9C7A3C; border-radius:99px; margin: 0 .04em; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; transition-delay:0ms !important; }
+      .kenburns{ animation: none !important; }
+      .marquee{ animation: none !important; }
+      .reveal, .reveal-mask>span, .reveal-clip, .reveal-scale{ opacity:1 !important; transform:none !important; clip-path:none !important; -webkit-clip-path:none !important; filter:none !important; }
+    }
+
+    /* Small refinements */
+    .num-tabular{ font-variant-numeric: tabular-nums; }
+
+    /* Edges */
+    .v-line{ background: linear-gradient(to bottom, transparent, rgba(11,11,11,.12), transparent); width:1px; }
+
+    /* Hide scrollbar for marquee */
+    .no-scrollbar::-webkit-scrollbar { display:none; }
+    .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
+  </style>
+</head>
+<body class="bg-paper text-ink">
+
+  <!-- Custom cursor -->
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════ NAV ═══════════════════════ -->
+  <header class="fixed top-4 left-4 right-4 md:top-6 md:left-6 md:right-6 z-50">
+    <nav class="nav-pill rounded-full px-4 md:px-7 py-3 md:py-3.5 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-2 group">
+        <!-- ÄRUZ inline mark -->
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none" class="shrink-0">
+          <circle cx="11" cy="10" r="3.6" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="29" cy="10" r="3.6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M13.5 12.5 L26.5 12.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M13.5 12.5 L18 22 L20 26 L20 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M26.5 12.5 L22 22 L20 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span class="ar-logo text-[20px] md:text-[22px] tracking-[.18em]">ÄRUZ</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-[13px]">
+        <a href="#manifesto" class="ul-draw">Felsefe</a>
+        <a href="#services"  class="ul-draw">Hizmetler</a>
+        <a href="#masters"   class="ul-draw">Ustalar</a>
+        <a href="#gallery"   class="ul-draw">Galeri</a>
+        <a href="#visit"     class="ul-draw">Ziyaret</a>
+      </div>
+
+      <a href="#booking" class="hidden sm:inline-flex items-center gap-2 text-[13px] font-medium bg-ink text-paper rounded-full px-5 py-2.5 hover:bg-brass hover:text-ink transition-colors duration-500">
+        Randevu
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a href="#booking" class="sm:hidden text-[12px] font-medium bg-ink text-paper rounded-full px-4 py-2">
+        Randevu
+      </a>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <section id="top" class="relative min-h-[100svh] overflow-hidden bg-paper">
+    <!-- Background grid -->
+    <div class="absolute inset-0 hero-grid opacity-60"></div>
+
+    <!-- Hero image right side -->
+    <div class="absolute top-0 right-0 h-full w-[44%] hidden lg:block">
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="parallax kenburns w-full h-full reveal-scale" data-parallax="0.18" data-reveal>
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=80"
+               alt="Usta tıraşı" class="w-full h-full object-cover">
+        </div>
+      </div>
+      <div class="absolute inset-0 hero-vignette pointer-events-none"></div>
+    </div>
+
+    <!-- Hero text -->
+    <div class="relative z-10 max-w-[1440px] mx-auto px-6 md:px-10 pt-28 md:pt-36 pb-16 md:pb-24 min-h-[100svh] flex flex-col justify-between">
+
+      <!-- Top labels -->
+      <div class="grid grid-cols-2 md:grid-cols-12 gap-6 mb-12 md:mb-0">
+        <div class="md:col-span-3 reveal" data-reveal style="--rd:200ms">
+          <p class="eyebrow">— Est. 2014</p>
+          <p class="mt-2 font-display-text text-[15px] leading-snug">Hair Artist <br/><span class="text-muted">Anatomik Saç Tasarımı</span></p>
+        </div>
+        <div class="hidden md:block md:col-span-3 md:col-start-7 reveal" data-reveal style="--rd:300ms">
+          <p class="eyebrow">No. 01 / IX</p>
+          <p class="mt-2 font-display-text text-[15px] leading-snug">Galata Köprüsü &<br/>Karaköy yakını, İstanbul</p>
+        </div>
+        <div class="hidden md:block md:col-span-3 reveal text-right md:text-left" data-reveal style="--rd:400ms">
+          <p class="eyebrow">İstanbul · TR</p>
+          <p class="mt-2 font-display-text text-[15px] leading-snug">41.0258° N<br/>28.9743° E</p>
+        </div>
+      </div>
+
+      <!-- Headline -->
+      <div class="mt-8 md:mt-0">
+        <h1 class="display-xl text-[16vw] sm:text-[14vw] md:text-[12vw] lg:text-[160px] xl:text-[200px]">
+          <span class="block reveal-mask" data-reveal style="--rd:300ms"><span>Her yüz,</span></span>
+          <span class="block reveal-mask" data-reveal style="--rd:500ms"><span><em>kendi</em> tasarımını</span></span>
+          <span class="block reveal-mask" data-reveal style="--rd:700ms"><span>ister.</span></span>
+        </h1>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+        <div class="md:col-span-5 reveal" data-reveal style="--rd:900ms">
+          <p class="text-[15px] md:text-[16px] leading-[1.65] text-ink/80 max-w-md font-display-text">
+            ÄRUZ'da kesim bir formül değil, bir tasarımdır. Anatomik analiz,
+            sanatsal el, ve İstanbul'un sessiz titizliğiyle; her yüzün geometrisine
+            kendi imzasını çiziyoruz.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#booking" class="btn-primary text-[13px] tracking-[.14em] uppercase font-medium">
+              Randevu Al
+              <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#manifesto" class="btn-ghost text-[13px] tracking-[.14em] uppercase font-medium">
+              Atölyeyi Keşfet
+            </a>
+          </div>
+        </div>
+
+        <div class="md:col-span-3 md:col-start-7 reveal" data-reveal style="--rd:1000ms">
+          <p class="eyebrow mb-2">Bugün</p>
+          <p class="font-display text-3xl md:text-4xl" id="today-date">—</p>
+          <p class="text-sm text-muted mt-1" id="today-hours">10:00 — 22:00</p>
+        </div>
+
+        <div class="md:col-span-3 reveal" data-reveal style="--rd:1100ms">
+          <p class="eyebrow mb-2">Bu hafta</p>
+          <p class="font-display text-3xl md:text-4xl"><span class="stat-num" data-count="46">0</span> <span class="text-muted text-xl">randevu</span></p>
+          <p class="text-sm text-muted mt-1">Açık takvim için yukarı bakın</p>
+        </div>
+      </div>
+
+      <!-- Scroll cue -->
+      <div class="absolute bottom-6 right-6 hidden md:flex flex-col items-center gap-3 text-[10px] tracking-[.3em] text-muted">
+        <span>SCROLL</span>
+        <span class="block w-px h-12 bg-ink/30 relative overflow-hidden">
+          <span class="absolute inset-0 bg-ink animate-[marquee_2.4s_var(--ease-in-out)_infinite]" style="height:50%;"></span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ MARQUEE ═══════════════════════ -->
+  <section aria-hidden="true" class="border-y border-line bg-paper2/60 overflow-hidden py-5 md:py-6">
+    <div class="marquee">
+      <div class="marquee-track text-[18px] md:text-[22px] font-display tracking-tight">
+        <span>Saç Kesimi</span><span class="ornament"></span>
+        <span class="italic text-brass">Klasik Tıraş</span><span class="ornament"></span>
+        <span>Sakal Bakımı</span><span class="ornament"></span>
+        <span>V.I.P.</span><span class="ornament"></span>
+        <span class="italic text-brass">Damat Tıraşı</span><span class="ornament"></span>
+        <span>Cilt Bakımı</span><span class="ornament"></span>
+        <span>Keratin</span><span class="ornament"></span>
+        <span class="italic text-brass">Saç Tasarımı</span><span class="ornament"></span>
+      </div>
+      <div class="marquee-track text-[18px] md:text-[22px] font-display tracking-tight" aria-hidden="true">
+        <span>Saç Kesimi</span><span class="ornament"></span>
+        <span class="italic text-brass">Klasik Tıraş</span><span class="ornament"></span>
+        <span>Sakal Bakımı</span><span class="ornament"></span>
+        <span>V.I.P.</span><span class="ornament"></span>
+        <span class="italic text-brass">Damat Tıraşı</span><span class="ornament"></span>
+        <span>Cilt Bakımı</span><span class="ornament"></span>
+        <span>Keratin</span><span class="ornament"></span>
+        <span class="italic text-brass">Saç Tasarımı</span><span class="ornament"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ MANIFESTO ═══════════════════════ -->
+  <section id="manifesto" class="relative py-24 md:py-40">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
+
+      <div class="md:col-span-3">
+        <p class="eyebrow reveal" data-reveal>— 01 / Felsefe</p>
+      </div>
+
+      <div class="md:col-span-9">
+        <h2 class="display-xl text-[10vw] md:text-[6.6vw] lg:text-[92px] leading-[.92]">
+          <span class="reveal-mask block" data-reveal><span>Saç kesimi bir</span></span>
+          <span class="reveal-mask block" data-reveal style="--rd:200ms"><span><em>anatomidir.</em></span></span>
+          <span class="reveal-mask block" data-reveal style="--rd:400ms"><span>Şablon değil, imza.</span></span>
+        </h2>
+      </div>
+
+      <div class="md:col-span-3 md:col-start-4 md:row-start-2">
+        <div class="reveal" data-reveal>
+          <p class="eyebrow mb-3">Atölye</p>
+          <p class="text-[15px] leading-[1.7] text-ink/80 max-w-xs">
+            Üç ustanın elinde, on yıllık bir disiplin. ÄRUZ; ışığı,
+            geometriyi ve sessizliği birleştiren küçük bir İstanbul atölyesidir.
+          </p>
+        </div>
+      </div>
+
+      <div class="md:col-span-4 md:col-start-7 md:row-start-2">
+        <div class="reveal" data-reveal style="--rd:150ms">
+          <p class="eyebrow mb-3">Yöntem</p>
+          <p class="text-[15px] leading-[1.7] text-ink/80">
+            Anatomik analiz · Saç dokusu okuması · Yüz orantısı · Tek
+            tek elle şekillendirme. Hiçbir kesim aynı değildir, çünkü
+            hiçbir yüz aynı değildir.
+          </p>
+        </div>
+      </div>
+
+      <div class="md:col-span-2 md:col-start-11 md:row-start-2">
+        <div class="reveal" data-reveal style="--rd:300ms">
+          <p class="font-display text-6xl md:text-7xl"><span class="stat-num" data-count="11">0</span></p>
+          <p class="eyebrow mt-1">Yıl, ustalık</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 image strip -->
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10 mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-12 gap-6">
+      <div class="md:col-span-5 aspect-[4/5] overflow-hidden gx reveal-clip" data-reveal>
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1200&q=80" alt="Berber aletleri" class="w-full h-full object-cover">
+      </div>
+      <div class="md:col-span-4 md:mt-24 aspect-[3/4] overflow-hidden gx reveal-clip" data-reveal style="--rd:150ms">
+        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1100&q=80" alt="Atölye iç mekan" class="w-full h-full object-cover">
+      </div>
+      <div class="md:col-span-3 md:mt-12 aspect-[3/4] overflow-hidden gx reveal-clip" data-reveal style="--rd:300ms">
+        <img src="https://images.unsplash.com/photo-1593702288056-f173f5c0aa70?auto=format&fit=crop&w=900&q=80" alt="Klasik tıraş detayı" class="w-full h-full object-cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SERVICES ═══════════════════════ -->
+  <section id="services" class="bg-paper border-t border-line py-24 md:py-40">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 md:mb-24">
+        <div class="md:col-span-3">
+          <p class="eyebrow reveal" data-reveal>— 02 / Hizmetler</p>
+        </div>
+        <div class="md:col-span-9">
+          <h2 class="display-xl text-[10vw] md:text-[6.6vw] lg:text-[88px] leading-[.92]">
+            <span class="reveal-mask block" data-reveal><span>Liste değil,</span></span>
+            <span class="reveal-mask block" data-reveal style="--rd:200ms"><span><em>küçük</em> bir menü.</span></span>
+          </h2>
+          <p class="reveal mt-8 max-w-xl text-[15px] leading-[1.7] text-muted" data-reveal style="--rd:400ms">
+            Her hizmet, ustanın doğrudan dokunduğu bir iştir; randevuyla, sıraya
+            girmeden, sakince. Fiyatlar ₺ cinsindendir ve KDV dahildir.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+        <!-- Column 1 -->
+        <div class="md:col-span-7">
+          <div class="border-t border-line">
+            <!-- Service rows -->
+            <a href="#booking" data-service="Saç Kesimi" class="service-row block group" data-reveal>
+              <div class="service-row__hover"></div>
+              <div class="service-row__inner flex items-baseline justify-between py-7 md:py-8">
+                <div class="flex-1">
+                  <p class="service-row__title font-display text-[28px] md:text-[36px] leading-none">Saç Kesimi</p>
+                  <p class="mt-2 text-[13px] text-muted group-hover:text-paper/60">Anatomik analiz · klasik veya modern · 45 dk</p>
+                </div>
+                <p class="service-row__price font-display text-[22px] md:text-[26px] num-tabular pl-6">₺850</p>
+              </div>
+            </a>
+
+            <a href="#booking" data-service="Sakal" class="service-row block group" data-reveal style="--rd:60ms">
+              <div class="service-row__hover"></div>
+              <div class="service-row__inner flex items-baseline justify-between py-7 md:py-8">
+                <div class="flex-1">
+                  <p class="service-row__title font-display text-[28px] md:text-[36px] leading-none">Sakal</p>
+                  <p class="mt-2 text-[13px] text-muted group-hover:text-paper/60">Şekillendirme · ustura ile bitirme · 30 dk</p>
+                </div>
+                <p class="service-row__price font-display text-[22px] md:text-[26px] num-tabular pl-6">₺550</p>
+              </div>
+            </a>
+
+            <a href="#booking" data-service="Saç + Sakal" class="service-row block group" data-reveal style="--rd:120ms">
+              <div class="service-row__hover"></div>
+              <div class="service-row__inner flex items-baseline justify-between py-7 md:py-8">
+                <div class="flex-1">
+                  <p class="service-row__title font-display text-[28px] md:text-[36px] leading-none">Saç + Sakal</p>
+                  <p class="mt-2 text-[13px] text-muted group-hover:text-paper/60">Birlikte tasarım · 70 dk · favori paket</p>
+                </div>
+                <p class="service-row__price font-display text-[22px] md:text-[26px] num-tabular pl-6">₺1.250</p>
+              </div>
+            </a>
+
+            <a href="#booking" data-service="Damat Tıraşı" class="service-row block group" data-reveal style="--rd:180ms">
+              <div class="service-row__hover"></div>
+              <div class="service-row__inner flex items-baseline justify-between py-7 md:py-8">
+                <div class="flex-1">
+                  <p class="service-row__title font-display text-[28px] md:text-[36px] leading-none italic text-brass">Damat Tıraşı</p>
+                  <p class="mt-2 text-[13px] text-muted group-hover:text-paper/60">Gün boyu ekip · cilt bakımı · özel kutlama</p>
+                </div>
+                <p class="service-row__price font-display text-[22px] md:text-[26px] num-tabular pl-6">₺2.500</p>
+              </div>
+            </a>
+
+            <a href="#booking" data-service="V.I.P." class="service-row block group" data-reveal style="--rd:240ms">
+              <div class="service-row__hover"></div>
+              <div class="service-row__inner flex items-baseline justify-between py-7 md:py-8">
+                <div class="flex-1">
+                  <p class="service-row__title font-display text-[28px] md:text-[36px] leading-none italic text-brass">V.I.P.</p>
+                  <p class="mt-2 text-[13px] text-muted group-hover:text-paper/60">Özel oda · içecek servisi · 2 saat tek randevu</p>
+                </div>
+                <p class="service-row__price font-display text-[22px] md:text-[26px] num-tabular pl-6">₺3.500</p>
+              </div>
+            </a>
+
+            <a href="#booking" data-service="Çocuk Saç" class="service-row block group" data-reveal style="--rd:300ms">
+              <div class="service-row__hover"></div>
+              <div class="service-row__inner flex items-baseline justify-between py-7 md:py-8">
+                <div class="flex-1">
+                  <p class="service-row__title font-display text-[28px] md:text-[36px] leading-none">Çocuk Saç</p>
+                  <p class="mt-2 text-[13px] text-muted group-hover:text-paper/60">8 yaş altı · oyun, sabır, hız</p>
+                </div>
+                <p class="service-row__price font-display text-[22px] md:text-[26px] num-tabular pl-6">₺450</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2 — secondary services -->
+        <div class="md:col-span-5 md:pl-10 md:border-l border-line">
+          <p class="eyebrow mb-6 reveal" data-reveal>İLERİ BAKIM</p>
+
+          <div class="space-y-5">
+            <div class="reveal flex items-baseline justify-between" data-reveal style="--rd:60ms">
+              <div>
+                <p class="font-display-text text-[18px]">Saç Boyama</p>
+                <p class="text-[12px] text-muted">Tam renk · ton düzeltme</p>
+              </div>
+              <p class="font-display num-tabular text-[18px]">₺1.500</p>
+            </div>
+            <div class="rule"></div>
+
+            <div class="reveal flex items-baseline justify-between" data-reveal style="--rd:120ms">
+              <div>
+                <p class="font-display-text text-[18px]">Keratin · Kısa</p>
+                <p class="text-[12px] text-muted">Saç onarımı · parlaklık</p>
+              </div>
+              <p class="font-display num-tabular text-[18px]">₺3.500</p>
+            </div>
+            <div class="rule"></div>
+
+            <div class="reveal flex items-baseline justify-between" data-reveal style="--rd:180ms">
+              <div>
+                <p class="font-display-text text-[18px]">Keratin · Uzun</p>
+                <p class="text-[12px] text-muted">Uzun saç · derin işlem</p>
+              </div>
+              <p class="font-display num-tabular text-[18px]">₺5.500</p>
+            </div>
+            <div class="rule"></div>
+
+            <div class="reveal flex items-baseline justify-between" data-reveal style="--rd:240ms">
+              <div>
+                <p class="font-display-text text-[18px]">Keratin · Tangel Free</p>
+                <p class="text-[12px] text-muted">Formaldehit içermez</p>
+              </div>
+              <p class="font-display num-tabular text-[18px]">₺4.500</p>
+            </div>
+            <div class="rule"></div>
+
+            <div class="reveal flex items-baseline justify-between" data-reveal style="--rd:300ms">
+              <div>
+                <p class="font-display-text text-[18px]">Grey Önler</p>
+                <p class="text-[12px] text-muted">Beyaz kapama · doğal görünüm</p>
+              </div>
+              <p class="font-display num-tabular text-[18px]">₺2.500</p>
+            </div>
+            <div class="rule"></div>
+
+            <div class="reveal flex items-baseline justify-between" data-reveal style="--rd:360ms">
+              <div>
+                <p class="font-display-text text-[18px]">Grey Komple</p>
+                <p class="text-[12px] text-muted">Tam beyaz kapama</p>
+              </div>
+              <p class="font-display num-tabular text-[18px]">₺3.500</p>
+            </div>
+            <div class="rule"></div>
+
+            <div class="reveal flex items-baseline justify-between" data-reveal style="--rd:420ms">
+              <div>
+                <p class="font-display-text text-[18px]">Fön & Şekillendirme</p>
+                <p class="text-[12px] text-muted">Özel gün için</p>
+              </div>
+              <p class="font-display num-tabular text-[18px]">₺450</p>
+            </div>
+            <div class="rule"></div>
+
+            <div class="reveal flex items-baseline justify-between" data-reveal style="--rd:480ms">
+              <div>
+                <p class="font-display-text text-[18px]">Cilt Bakımı</p>
+                <p class="text-[12px] text-muted">Maske · arınma · masaj</p>
+              </div>
+              <p class="font-display num-tabular text-[18px]">₺1.250</p>
+            </div>
+          </div>
+
+          <a href="#booking" class="mt-10 inline-flex items-center gap-2 text-[13px] uppercase tracking-[.18em] font-medium ul-draw">
+            Randevu menüsüne git
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ MASTERS ═══════════════════════ -->
+  <section id="masters" class="bg-ink text-paper py-24 md:py-40">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 md:mb-24">
+        <div class="md:col-span-3">
+          <p class="eyebrow text-mute2 reveal" data-reveal>— 03 / Ustalar</p>
+        </div>
+        <div class="md:col-span-9">
+          <h2 class="display-xl text-[10vw] md:text-[6.6vw] lg:text-[88px] leading-[.92] text-paper">
+            <span class="reveal-mask block" data-reveal><span>Dört el,</span></span>
+            <span class="reveal-mask block" data-reveal style="--rd:200ms"><span>tek bir <em>imza.</em></span></span>
+          </h2>
+          <p class="reveal mt-8 max-w-xl text-[15px] leading-[1.7] text-paper/60" data-reveal style="--rd:400ms">
+            Aruz ailesinden gelen üç usta ve onların seçtiği bir berber sanatçısı.
+            Her birinin elinde farklı bir disiplin, ama atölyenin tonu tek.
+          </p>
+        </div>
+      </div>
+
+      <!-- Masters grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+        <!-- Master 1 — İslam -->
+        <a href="#booking" data-master="İslam Aruz" class="master-card group block" data-reveal>
+          <div class="relative aspect-[4/5] overflow-hidden bg-ink2">
+            <img src="p_6826_e1dcc0ff4b78da5e.jpg" alt="İslam Aruz" class="master-img w-full h-full object-cover">
+            <div class="master-overlay">
+              <p class="text-[12px] uppercase tracking-[.2em] text-brass2">Usta · Kurucu</p>
+              <p class="font-display text-[20px] mt-1">Klasik kesim · saç boyama</p>
+            </div>
+            <span class="absolute top-3 left-3 text-[10px] tracking-[.3em] uppercase text-paper/70 font-mono">No. 01</span>
+          </div>
+          <div class="pt-4 flex items-baseline justify-between">
+            <p class="font-display text-[22px] md:text-[26px]">İslam Aruz</p>
+            <p class="text-[12px] text-paper/50 uppercase tracking-[.2em]">22 yıl</p>
+          </div>
+          <p class="text-[13px] text-paper/55 mt-1">Erkek Kuaförü · Hair Artist</p>
+        </a>
+
+        <!-- Master 2 — Kadir -->
+        <a href="#booking" data-master="Kadir Aruz" class="master-card group block" data-reveal style="--rd:120ms">
+          <div class="relative aspect-[4/5] overflow-hidden bg-ink2">
+            <img src="p_6827_072eb627ad7fbb52.jpg" alt="Kadir Aruz" class="master-img w-full h-full object-cover">
+            <div class="master-overlay">
+              <p class="text-[12px] uppercase tracking-[.2em] text-brass2">Berber</p>
+              <p class="font-display text-[20px] mt-1">Modern kesim · fade</p>
+            </div>
+            <span class="absolute top-3 left-3 text-[10px] tracking-[.3em] uppercase text-paper/70 font-mono">No. 02</span>
+          </div>
+          <div class="pt-4 flex items-baseline justify-between">
+            <p class="font-display text-[22px] md:text-[26px]">Kadir Aruz</p>
+            <p class="text-[12px] text-paper/50 uppercase tracking-[.2em]">9 yıl</p>
+          </div>
+          <p class="text-[13px] text-paper/55 mt-1">Erkek Kuaförü</p>
+        </a>
+
+        <!-- Master 3 — Ahmet -->
+        <a href="#booking" data-master="Ahmet Aruz" class="master-card group block" data-reveal style="--rd:240ms">
+          <div class="relative aspect-[4/5] overflow-hidden bg-ink2">
+            <img src="p_8569_361c596048c29841.jpg" alt="Ahmet Aruz" class="master-img w-full h-full object-cover">
+            <div class="master-overlay">
+              <p class="text-[12px] uppercase tracking-[.2em] text-brass2">Berber</p>
+              <p class="font-display text-[20px] mt-1">Sakal mimarı · ustura</p>
+            </div>
+            <span class="absolute top-3 left-3 text-[10px] tracking-[.3em] uppercase text-paper/70 font-mono">No. 03</span>
+          </div>
+          <div class="pt-4 flex items-baseline justify-between">
+            <p class="font-display text-[22px] md:text-[26px]">Ahmet Aruz</p>
+            <p class="text-[12px] text-paper/50 uppercase tracking-[.2em]">12 yıl</p>
+          </div>
+          <p class="text-[13px] text-paper/55 mt-1">Erkek Kuaförü · Sakal uzmanı</p>
+        </a>
+
+        <!-- Master 4 — Barış -->
+        <a href="#booking" data-master="Barış Buğda" class="master-card group block" data-reveal style="--rd:360ms">
+          <div class="relative aspect-[4/5] overflow-hidden bg-ink2">
+            <img src="p_10535_44af754e8c8bdb98.jpg" alt="Barış Buğda" class="master-img w-full h-full object-cover">
+            <div class="master-overlay">
+              <p class="text-[12px] uppercase tracking-[.2em] text-brass2">Berber</p>
+              <p class="font-display text-[20px] mt-1">Çocuk kesimleri · damat</p>
+            </div>
+            <span class="absolute top-3 left-3 text-[10px] tracking-[.3em] uppercase text-paper/70 font-mono">No. 04</span>
+          </div>
+          <div class="pt-4 flex items-baseline justify-between">
+            <p class="font-display text-[22px] md:text-[26px]">Barış Buğda</p>
+            <p class="text-[12px] text-paper/50 uppercase tracking-[.2em]">7 yıl</p>
+          </div>
+          <p class="text-[13px] text-paper/55 mt-1">Erkek Kuaförü</p>
+        </a>
+      </div>
+
+      <!-- quote -->
+      <div class="mt-24 md:mt-36 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+        <div class="md:col-span-2">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" class="text-brass2"><path d="M10 30c0-8 6-14 12-14v6c-3 0-6 3-6 6h6v10H10V30zm18 0c0-8 6-14 12-14v6c-3 0-6 3-6 6h6v10H28V30z" fill="currentColor"/></svg>
+        </div>
+        <div class="md:col-span-10">
+          <p class="font-display text-[28px] md:text-[42px] leading-[1.18]" data-reveal>
+            <span class="reveal-mask"><span>Bir kesim, kişinin kendi yansımasına dönüşene kadar bitmemiş demektir.</span></span>
+          </p>
+          <p class="mt-6 eyebrow text-mute2 reveal" data-reveal style="--rd:300ms">— İslam Aruz, kurucu</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ BOOKING ═══════════════════════ -->
+  <section id="booking" class="bg-paper py-24 md:py-40">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10">
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
+        <div class="md:col-span-3">
+          <p class="eyebrow reveal" data-reveal>— 04 / Randevu</p>
+        </div>
+        <div class="md:col-span-9">
+          <h2 class="display-xl text-[10vw] md:text-[6.6vw] lg:text-[88px] leading-[.92]">
+            <span class="reveal-mask block" data-reveal><span>Dört adım,</span></span>
+            <span class="reveal-mask block" data-reveal style="--rd:200ms"><span><em>doksan</em> saniye.</span></span>
+          </h2>
+        </div>
+      </div>
+
+      <!-- Booking shell -->
+      <div class="max-w-[980px] mx-auto" id="booking-shell">
+
+        <!-- Step indicator -->
+        <div class="flex items-center gap-3 mb-12">
+          <div class="step-dot done" data-step-dot="1"></div>
+          <div class="step-dot" data-step-dot="2"></div>
+          <div class="step-dot" data-step-dot="3"></div>
+          <div class="step-dot" data-step-dot="4"></div>
+        </div>
+
+        <div class="mb-10 flex items-baseline justify-between">
+          <p class="eyebrow"><span id="step-label">Adım 01 — Hizmet seç</span></p>
+          <p class="eyebrow text-muted"><span id="step-count">01</span> / 04</p>
+        </div>
+
+        <!-- STEP 1: Service -->
+        <div class="booking-step active in" data-step="1">
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+            <button class="pick-card text-left" data-pick="service" data-value="Saç Kesimi" data-duration="45 dk" data-price="₺850">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <p class="font-display text-[22px] md:text-[26px]">Saç Kesimi</p>
+              <p class="pick-meta text-[12px] mt-1 text-muted">45 dk</p>
+              <p class="font-display num-tabular text-[18px] mt-4">₺850</p>
+            </button>
+            <button class="pick-card text-left" data-pick="service" data-value="Sakal" data-duration="30 dk" data-price="₺550">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <p class="font-display text-[22px] md:text-[26px]">Sakal</p>
+              <p class="pick-meta text-[12px] mt-1 text-muted">30 dk</p>
+              <p class="font-display num-tabular text-[18px] mt-4">₺550</p>
+            </button>
+            <button class="pick-card text-left" data-pick="service" data-value="Saç + Sakal" data-duration="70 dk" data-price="₺1.250">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <p class="font-display text-[22px] md:text-[26px]">Saç + Sakal</p>
+              <p class="pick-meta text-[12px] mt-1 text-muted">70 dk · favori</p>
+              <p class="font-display num-tabular text-[18px] mt-4">₺1.250</p>
+            </button>
+            <button class="pick-card text-left" data-pick="service" data-value="Damat Tıraşı" data-duration="120 dk" data-price="₺2.500">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <p class="font-display text-[22px] md:text-[26px] italic">Damat Tıraşı</p>
+              <p class="pick-meta text-[12px] mt-1 text-muted">120 dk</p>
+              <p class="font-display num-tabular text-[18px] mt-4">₺2.500</p>
+            </button>
+            <button class="pick-card text-left" data-pick="service" data-value="V.I.P." data-duration="120 dk" data-price="₺3.500">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <p class="font-display text-[22px] md:text-[26px] italic">V.I.P.</p>
+              <p class="pick-meta text-[12px] mt-1 text-muted">120 dk · özel oda</p>
+              <p class="font-display num-tabular text-[18px] mt-4">₺3.500</p>
+            </button>
+            <button class="pick-card text-left" data-pick="service" data-value="Çocuk Saç" data-duration="30 dk" data-price="₺450">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <p class="font-display text-[22px] md:text-[26px]">Çocuk Saç</p>
+              <p class="pick-meta text-[12px] mt-1 text-muted">30 dk</p>
+              <p class="font-display num-tabular text-[18px] mt-4">₺450</p>
+            </button>
+            <button class="pick-card text-left" data-pick="service" data-value="Saç Boyama" data-duration="90 dk" data-price="₺1.500">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <p class="font-display text-[22px] md:text-[26px]">Saç Boyama</p>
+              <p class="pick-meta text-[12px] mt-1 text-muted">90 dk</p>
+              <p class="font-display num-tabular text-[18px] mt-4">₺1.500</p>
+            </button>
+            <button class="pick-card text-left" data-pick="service" data-value="Keratin" data-duration="120 dk" data-price="₺3.500">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <p class="font-display text-[22px] md:text-[26px]">Keratin</p>
+              <p class="pick-meta text-[12px] mt-1 text-muted">120 dk · onarım</p>
+              <p class="font-display num-tabular text-[18px] mt-4">₺3.500</p>
+            </button>
+            <button class="pick-card text-left" data-pick="service" data-value="Cilt Bakımı" data-duration="60 dk" data-price="₺1.250">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <p class="font-display text-[22px] md:text-[26px]">Cilt Bakımı</p>
+              <p class="pick-meta text-[12px] mt-1 text-muted">60 dk</p>
+              <p class="font-display num-tabular text-[18px] mt-4">₺1.250</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Master -->
+        <div class="booking-step" data-step="2">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <button class="pick-card text-left" data-pick="master" data-value="İslam Aruz">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="aspect-square overflow-hidden rounded-lg mb-3 bg-ink"><img src="p_6826_e1dcc0ff4b78da5e.jpg" class="w-full h-full object-cover" alt=""></div>
+              <p class="font-display text-[20px]">İslam Aruz</p>
+              <p class="pick-meta text-[11px] mt-1 text-muted uppercase tracking-[.16em]">Usta · Kurucu</p>
+            </button>
+            <button class="pick-card text-left" data-pick="master" data-value="Kadir Aruz">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="aspect-square overflow-hidden rounded-lg mb-3 bg-ink"><img src="p_6827_072eb627ad7fbb52.jpg" class="w-full h-full object-cover" alt=""></div>
+              <p class="font-display text-[20px]">Kadir Aruz</p>
+              <p class="pick-meta text-[11px] mt-1 text-muted uppercase tracking-[.16em]">Berber</p>
+            </button>
+            <button class="pick-card text-left" data-pick="master" data-value="Ahmet Aruz">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="aspect-square overflow-hidden rounded-lg mb-3 bg-ink"><img src="p_8569_361c596048c29841.jpg" class="w-full h-full object-cover" alt=""></div>
+              <p class="font-display text-[20px]">Ahmet Aruz</p>
+              <p class="pick-meta text-[11px] mt-1 text-muted uppercase tracking-[.16em]">Sakal uzmanı</p>
+            </button>
+            <button class="pick-card text-left" data-pick="master" data-value="Barış Buğda">
+              <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="aspect-square overflow-hidden rounded-lg mb-3 bg-ink"><img src="p_10535_44af754e8c8bdb98.jpg" class="w-full h-full object-cover" alt=""></div>
+              <p class="font-display text-[20px]">Barış Buğda</p>
+              <p class="pick-meta text-[11px] mt-1 text-muted uppercase tracking-[.16em]">Berber</p>
+            </button>
+          </div>
+
+          <button class="pick-card text-left mt-4 w-full md:w-1/2" data-pick="master" data-value="Müsait olan">
+            <div class="pick-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <p class="font-display text-[20px]">Müsait olan</p>
+            <p class="pick-meta text-[11px] mt-1 text-muted uppercase tracking-[.16em]">İlk açılan saatte herhangi bir usta</p>
+          </button>
+        </div>
+
+        <!-- STEP 3: Date & Time -->
+        <div class="booking-step" data-step="3">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <div>
+              <div class="flex items-baseline justify-between mb-4">
+                <p class="font-display text-[24px]" id="cal-month">—</p>
+                <div class="flex items-center gap-2">
+                  <button id="cal-prev" class="w-9 h-9 rounded-full border border-line flex items-center justify-center hover:border-ink transition-colors" aria-label="Önceki ay">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L4 7l5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <button id="cal-next" class="w-9 h-9 rounded-full border border-line flex items-center justify-center hover:border-ink transition-colors" aria-label="Sonraki ay">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="grid grid-cols-7 gap-2 mb-2 text-[10px] uppercase tracking-[.2em] text-muted">
+                <div class="text-center">Pt</div><div class="text-center">Sa</div><div class="text-center">Ça</div><div class="text-center">Pe</div><div class="text-center">Cu</div><div class="text-center">Ct</div><div class="text-center">Pa</div>
+              </div>
+              <div class="grid grid-cols-7 gap-2" id="calendar"></div>
+            </div>
+
+            <div>
+              <p class="font-display text-[24px] mb-4" id="day-label">Bir gün seçin</p>
+              <div class="grid grid-cols-3 sm:grid-cols-4 gap-2" id="slots"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: Contact -->
+        <div class="booking-step" data-step="4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="space-y-6">
+              <div class="field-row">
+                <label for="b-name">Ad Soyad</label>
+                <input id="b-name" type="text" class="field" placeholder="Mehmet Demir">
+              </div>
+              <div class="field-row">
+                <label for="b-phone">Telefon</label>
+                <input id="b-phone" type="tel" class="field" placeholder="+90 5__ ___ __ __">
+              </div>
+              <div class="field-row">
+                <label for="b-email">E-posta (opsiyonel)</label>
+                <input id="b-email" type="email" class="field" placeholder="ad@ornek.com">
+              </div>
+              <div class="field-row">
+                <label for="b-note">Not (opsiyonel)</label>
+                <textarea id="b-note" class="field" rows="2" placeholder="Saç tipi, alerji, kısa not"></textarea>
+              </div>
+            </div>
+
+            <!-- Summary card -->
+            <div class="bg-ink text-paper rounded-3xl p-7 md:p-9 self-start">
+              <p class="eyebrow text-mute2">Özet</p>
+              <div class="mt-6 space-y-5">
+                <div class="flex justify-between gap-3"><span class="text-paper/60 text-[13px]">Hizmet</span><span class="font-display text-[18px] text-right" id="sum-service">—</span></div>
+                <div class="rule opacity-20"></div>
+                <div class="flex justify-between gap-3"><span class="text-paper/60 text-[13px]">Usta</span><span class="font-display text-[18px] text-right" id="sum-master">—</span></div>
+                <div class="rule opacity-20"></div>
+                <div class="flex justify-between gap-3"><span class="text-paper/60 text-[13px]">Tarih</span><span class="font-display text-[18px] text-right" id="sum-date">—</span></div>
+                <div class="rule opacity-20"></div>
+                <div class="flex justify-between gap-3"><span class="text-paper/60 text-[13px]">Saat</span><span class="font-display text-[18px] text-right" id="sum-time">—</span></div>
+                <div class="rule opacity-20"></div>
+                <div class="flex justify-between gap-3"><span class="text-paper/60 text-[13px]">Süre</span><span class="font-display text-[18px] text-right" id="sum-duration">—</span></div>
+                <div class="rule opacity-40"></div>
+                <div class="flex justify-between gap-3 items-baseline"><span class="text-paper/60 text-[13px]">Toplam</span><span class="font-display text-[28px] text-brass2 num-tabular text-right" id="sum-total">—</span></div>
+              </div>
+              <p class="mt-7 text-[12px] text-paper/40 leading-relaxed">
+                Onay verdiğinizde sadece bir SMS gelir. Ödeme atölyede yapılır.
+                İptal randevudan 4 saat öncesine kadar ücretsizdir.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: Confirmation -->
+        <div class="booking-step" data-step="5">
+          <div class="text-center py-10 md:py-16">
+            <div class="confetti-mark inline-flex w-20 h-20 rounded-full bg-brass items-center justify-center text-ink">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="display-xl text-[10vw] md:text-[68px] mt-8">Randevunuz <em>alındı.</em></h3>
+            <p class="mt-6 text-muted max-w-md mx-auto">
+              Onay SMS'i birkaç dakika içinde gelecek. Görüşmek üzere — sessizce.
+            </p>
+
+            <div class="mt-10 max-w-md mx-auto bg-paper2/60 border border-line rounded-2xl p-6 text-left">
+              <p class="eyebrow">Randevu</p>
+              <p class="font-display text-[26px] mt-2" id="cf-service">—</p>
+              <p class="text-[14px] text-muted mt-1"><span id="cf-master">—</span> · <span id="cf-when">—</span></p>
+            </div>
+
+            <button id="reset-booking" class="btn-ghost text-[13px] tracking-[.14em] uppercase font-medium mt-10">
+              Yeni randevu
+            </button>
+          </div>
+        </div>
+
+        <!-- Nav buttons -->
+        <div class="mt-12 flex items-center justify-between" id="booking-nav">
+          <button id="prev-step" class="btn-ghost text-[13px] tracking-[.14em] uppercase font-medium opacity-50 pointer-events-none">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M7 3L3 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Geri
+          </button>
+          <button id="next-step" class="btn-primary text-[13px] tracking-[.14em] uppercase font-medium opacity-40 pointer-events-none">
+            Devam
+            <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ GALLERY ═══════════════════════ -->
+  <section id="gallery" class="bg-paper border-t border-line py-24 md:py-40">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 md:mb-20">
+        <div class="md:col-span-3">
+          <p class="eyebrow reveal" data-reveal>— 05 / Galeri</p>
+        </div>
+        <div class="md:col-span-9">
+          <h2 class="display-xl text-[10vw] md:text-[6.6vw] lg:text-[88px] leading-[.92]">
+            <span class="reveal-mask block" data-reveal><span>Sessiz</span></span>
+            <span class="reveal-mask block" data-reveal style="--rd:200ms"><span>bir <em>portföy.</em></span></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-3 md:gap-5">
+        <div class="col-span-12 md:col-span-7 aspect-[16/10] gx reveal-clip" data-reveal>
+          <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1600&q=80" alt="Atölye iç mekan" class="w-full h-full object-cover">
+        </div>
+        <div class="col-span-6 md:col-span-5 aspect-square gx reveal-clip" data-reveal style="--rd:120ms">
+          <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1100&q=80" alt="Saç kesimi" class="w-full h-full object-cover">
+        </div>
+        <div class="col-span-6 md:col-span-4 aspect-[3/4] gx reveal-clip" data-reveal style="--rd:240ms">
+          <img src="https://images.unsplash.com/photo-1622287162716-f311baa1a2b8?auto=format&fit=crop&w=1100&q=80" alt="Makas detayı" class="w-full h-full object-cover">
+        </div>
+        <div class="col-span-12 md:col-span-5 aspect-[4/3] gx reveal-clip" data-reveal style="--rd:360ms">
+          <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?auto=format&fit=crop&w=1400&q=80" alt="Atölye detayı" class="w-full h-full object-cover">
+        </div>
+        <div class="col-span-6 md:col-span-3 aspect-[4/5] gx reveal-clip" data-reveal style="--rd:480ms">
+          <img src="https://images.unsplash.com/photo-1599351431613-18ef1fdd27e3?auto=format&fit=crop&w=900&q=80" alt="Berber ekipmanları" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ VISIT ═══════════════════════ -->
+  <section id="visit" class="bg-ink text-paper py-24 md:py-40">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 md:mb-24">
+        <div class="md:col-span-3">
+          <p class="eyebrow text-mute2 reveal" data-reveal>— 06 / Ziyaret</p>
+        </div>
+        <div class="md:col-span-9">
+          <h2 class="display-xl text-[10vw] md:text-[6.6vw] lg:text-[88px] leading-[.92] text-paper">
+            <span class="reveal-mask block" data-reveal><span>Bir aşağı,</span></span>
+            <span class="reveal-mask block" data-reveal style="--rd:200ms"><span><em>köprünün</em> yanında.</span></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+        <!-- Address -->
+        <div class="md:col-span-4 space-y-10">
+          <div class="reveal" data-reveal>
+            <p class="eyebrow text-mute2 mb-3">Adres</p>
+            <p class="font-display text-[22px] leading-snug">
+              Kemankeş Karamustafa Paşa Mah.<br/>
+              No. 14, Karaköy<br/>
+              Beyoğlu / İstanbul
+            </p>
+          </div>
+
+          <div class="reveal" data-reveal style="--rd:150ms">
+            <p class="eyebrow text-mute2 mb-3">İletişim</p>
+            <p class="font-display text-[22px] leading-snug">
+              <a href="tel:+902122430000" class="ul-draw">+90 212 243 00 00</a><br/>
+              <a href="mailto:randevu@aruz.istanbul" class="ul-draw">randevu@aruz.istanbul</a><br/>
+              <a href="https://instagram.com" class="ul-draw">@aruz.hairartist</a>
+            </p>
+          </div>
+
+          <div class="reveal" data-reveal style="--rd:300ms">
+            <p class="eyebrow text-mute2 mb-3">Çalışma saatleri</p>
+            <table class="font-display-text text-[16px] leading-loose">
+              <tbody>
+                <tr><td class="pr-8 text-paper/55">Pzt — Cum</td><td>10:00 — 22:00</td></tr>
+                <tr><td class="pr-8 text-paper/55">Cumartesi</td><td>09:00 — 23:00</td></tr>
+                <tr><td class="pr-8 text-paper/55">Pazar</td><td>12:00 — 20:00</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- "Map" panel -->
+        <div class="md:col-span-8 relative">
+          <div class="reveal-clip" data-reveal>
+            <div class="relative rounded-3xl overflow-hidden aspect-[5/4] md:aspect-[16/10] bg-ink2">
+              <!-- Stylized SVG map of Karaköy area -->
+              <svg viewBox="0 0 800 500" class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <pattern id="dot" width="14" height="14" patternUnits="userSpaceOnUse">
+                    <circle cx="1" cy="1" r="0.6" fill="rgba(255,255,255,0.08)"/>
+                  </pattern>
+                  <linearGradient id="bos" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#1A1A1A"/>
+                    <stop offset="1" stop-color="#0B0B0B"/>
+                  </linearGradient>
+                </defs>
+                <rect width="800" height="500" fill="url(#bos)"/>
+                <rect width="800" height="500" fill="url(#dot)"/>
+                <!-- bosphorus shapes -->
+                <path d="M0,220 C140,180 260,260 400,240 C540,220 660,300 800,280 L800,500 L0,500 Z" fill="rgba(156,122,60,.06)" stroke="rgba(156,122,60,.2)" stroke-width="0.5"/>
+                <path d="M0,260 C160,220 280,300 420,280 C580,260 700,340 800,320" fill="none" stroke="rgba(156,122,60,.18)" stroke-width="0.5"/>
+                <!-- streets -->
+                <g stroke="rgba(242,238,229,.1)" stroke-width="0.5" fill="none">
+                  <path d="M120,80 L180,400"/>
+                  <path d="M200,60 L260,420"/>
+                  <path d="M280,40 L340,430"/>
+                  <path d="M360,30 L420,440"/>
+                  <path d="M460,60 L520,420"/>
+                  <path d="M40,140 L780,200"/>
+                  <path d="M20,200 L760,260"/>
+                  <path d="M40,80 L600,160"/>
+                </g>
+                <!-- Galata bridge -->
+                <line x1="60" y1="180" x2="600" y2="220" stroke="#C9A463" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+                <line x1="60" y1="184" x2="600" y2="224" stroke="#C9A463" stroke-width=".5" opacity=".5"/>
+                <text x="280" y="170" fill="#C9A463" font-family="JetBrains Mono" font-size="11" letter-spacing="3">GALATA</text>
+                <!-- pin -->
+                <g transform="translate(430,200)">
+                  <circle r="50" fill="rgba(201,164,99,.08)">
+                    <animate attributeName="r" values="35;55;35" dur="3s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values=".2;0;.2" dur="3s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle r="28" fill="rgba(201,164,99,.12)"/>
+                  <circle r="9" fill="#C9A463"/>
+                  <circle r="3" fill="#0B0B0B"/>
+                  <text x="20" y="-10" fill="#F2EEE5" font-family="Fraunces" font-size="20" font-style="italic">ÄRUZ</text>
+                  <text x="20" y="10" fill="rgba(242,238,229,.5)" font-family="JetBrains Mono" font-size="9" letter-spacing="2">KARAKÖY</text>
+                </g>
+              </svg>
+              <div class="absolute bottom-5 right-5 flex items-center gap-3">
+                <span class="text-[10px] tracking-[.3em] uppercase text-paper/50 font-mono">41.0258°N · 28.9743°E</span>
+                <a href="https://maps.google.com" target="_blank" rel="noopener" class="text-[11px] tracking-[.18em] uppercase font-medium bg-paper text-ink rounded-full px-4 py-2 hover:bg-brass transition-colors">Yol Tarifi</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ CTA STRIP ═══════════════════════ -->
+  <section class="bg-paper py-20 md:py-32 border-t border-line">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-10 text-center">
+      <p class="eyebrow reveal" data-reveal>— Bir sonraki randevu</p>
+      <h3 class="display-xl text-[12vw] md:text-[9vw] lg:text-[140px] mt-6 leading-[.9]">
+        <span class="reveal-mask block" data-reveal style="--rd:150ms"><span>Senin <em>imzanı</em></span></span>
+        <span class="reveal-mask block" data-reveal style="--rd:350ms"><span>tasarlayalım.</span></span>
+      </h3>
+      <div class="mt-10 reveal" data-reveal style="--rd:500ms">
+        <a href="#booking" class="btn-primary text-[13px] tracking-[.14em] uppercase font-medium">
+          Randevu Al
+          <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer class="bg-ink text-paper">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10 pt-16 md:pt-20 pb-10">
+      <div class="grid grid-cols-2 md:grid-cols-12 gap-10">
+        <div class="col-span-2 md:col-span-5">
+          <div class="ar-logo text-[44px] md:text-[64px] tracking-[.18em]">ÄRUZ</div>
+          <p class="font-display-text mt-2 text-paper/60">Hair Artist · Anatomik Saç Tasarım</p>
+          <p class="mt-8 max-w-sm text-[14px] text-paper/55 leading-relaxed">
+            Karaköy'de küçük bir atölye. 2014'ten beri, sessizce.
+          </p>
+        </div>
+
+        <div class="md:col-span-2">
+          <p class="eyebrow text-mute2 mb-4">Atölye</p>
+          <ul class="space-y-2 text-[14px]">
+            <li><a href="#manifesto" class="ul-draw">Felsefe</a></li>
+            <li><a href="#services" class="ul-draw">Hizmetler</a></li>
+            <li><a href="#masters" class="ul-draw">Ustalar</a></li>
+            <li><a href="#gallery" class="ul-draw">Galeri</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-2">
+          <p class="eyebrow text-mute2 mb-4">Bağlantı</p>
+          <ul class="space-y-2 text-[14px]">
+            <li><a href="#booking" class="ul-draw">Randevu</a></li>
+            <li><a href="tel:+902122430000" class="ul-draw">+90 212 243 00 00</a></li>
+            <li><a href="mailto:randevu@aruz.istanbul" class="ul-draw">randevu@aruz.istanbul</a></li>
+            <li><a href="#" class="ul-draw">Instagram</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3">
+          <p class="eyebrow text-mute2 mb-4">Bültene katıl</p>
+          <p class="text-[13px] text-paper/55 mb-4">Yeni hizmetler ve özel randevular için, ayda en fazla bir kez.</p>
+          <form onsubmit="event.preventDefault(); this.querySelector('button').innerHTML='Teşekkürler ✓'; this.querySelector('input').value='';" class="flex items-center border-b border-paper/20 focus-within:border-paper transition-colors">
+            <input type="email" required placeholder="ad@ornek.com" class="flex-1 bg-transparent py-3 text-[14px] placeholder-paper/30 outline-none">
+            <button type="submit" class="text-[12px] uppercase tracking-[.18em] font-medium pl-3">Katıl</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-paper/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-[12px] text-paper/40">
+        <p>© <span id="year">2026</span> ÄRUZ Hair Artist. Tüm hakları saklıdır.</p>
+        <p class="font-mono tracking-[.2em] uppercase">Karaköy · İstanbul · 41.0258°N</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+  <script>
+    'use strict';
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ——————————————————— Cursor (desktop only) ———————————————————
+    if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      const dot  = document.querySelector('.cursor');
+      const ring = document.querySelector('.cursor-ring');
+      let tx = 0, ty = 0, rx = 0, ry = 0;
+      document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; if (dot){ dot.style.left = tx+'px'; dot.style.top = ty+'px'; }});
+      const loop = () => { rx += (tx - rx) * 0.18; ry += (ty - ry) * 0.18; if (ring){ ring.style.left = rx+'px'; ring.style.top = ry+'px'; } requestAnimationFrame(loop); };
+      requestAnimationFrame(loop);
+      const hovers = 'a,button,.pick-card,.service-row,.master-card,.gx,[data-cursor]';
+      document.addEventListener('mouseover', e => { if (e.target.closest(hovers)) dot?.classList.add('is-large'); });
+      document.addEventListener('mouseout',  e => { if (e.target.closest(hovers)) dot?.classList.remove('is-large'); });
+    }
+
+    // ——————————————————— Reveal observer ———————————————————
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+    const markAll = (root = document) => {
+      root.querySelectorAll('[data-reveal], .reveal, .reveal-mask, .reveal-clip, .reveal-scale').forEach(el => {
+        // ensure baseline class for animation rules
+        if (!el.classList.contains('reveal') && !el.classList.contains('reveal-mask') && !el.classList.contains('reveal-clip') && !el.classList.contains('reveal-scale')) {
+          el.classList.add('reveal');
+        }
+        io.observe(el);
+      });
+    };
+    markAll();
+
+    // Trigger initial reveals on hero (above the fold) immediately after font load
+    requestAnimationFrame(() => {
+      document.querySelectorAll('#top [data-reveal], #top .reveal-mask, #top .reveal-clip, #top .reveal-scale').forEach(el => el.classList.add('in'));
+    });
+
+    // ——————————————————— Number counter ———————————————————
+    const counters = document.querySelectorAll('[data-count]');
+    const counterIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.count, 10);
+        const dur = reduce ? 0 : 1400;
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min(1, (now - start) / Math.max(1, dur));
+          const v = Math.floor(target * (1 - Math.pow(1 - t, 3)));
+          el.textContent = v;
+          if (t < 1) requestAnimationFrame(tick);
+          else el.textContent = target;
+        };
+        requestAnimationFrame(tick);
+        counterIo.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterIo.observe(c));
+
+    // ——————————————————— Parallax (hero image) ———————————————————
+    if (!reduce) {
+      const parallaxEls = document.querySelectorAll('[data-parallax]');
+      let raf;
+      const onScroll = () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          const y = window.scrollY;
+          parallaxEls.forEach(el => {
+            const k = parseFloat(el.dataset.parallax || '0.2');
+            el.style.transform = `translateY(${-y * k}px)`;
+          });
+          raf = null;
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    // ——————————————————— Date / today ———————————————————
+    const months = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+    const days = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
+    const now = new Date();
+    document.getElementById('today-date').textContent = `${now.getDate()} ${months[now.getMonth()]}`;
+    document.getElementById('year').textContent = now.getFullYear();
+
+    // ——————————————————— Floating nav contrast (dark sections) ———————————————————
+    const nav = document.querySelector('header nav');
+    const darkSections = document.querySelectorAll('#masters, #visit, footer');
+    const navIo = new IntersectionObserver((entries) => {
+      let anyDark = false;
+      entries.forEach(e => { if (e.isIntersecting && e.intersectionRatio > 0.25) anyDark = true; });
+      // Recompute based on current state of all dark sections
+      let onDark = false;
+      darkSections.forEach(s => {
+        const r = s.getBoundingClientRect();
+        if (r.top < 80 && r.bottom > 80) onDark = true;
+      });
+      nav.classList.toggle('dark', onDark);
+    }, { threshold: [0, 0.25, 0.5, 1] });
+    darkSections.forEach(s => navIo.observe(s));
+    window.addEventListener('scroll', () => {
+      let onDark = false;
+      darkSections.forEach(s => {
+        const r = s.getBoundingClientRect();
+        if (r.top < 80 && r.bottom > 80) onDark = true;
+      });
+      nav.classList.toggle('dark', onDark);
+    }, { passive: true });
+
+    // ——————————————————— Booking flow ———————————————————
+    const state = { step: 1, service: null, master: null, date: null, time: null };
+    const stepLabels = [
+      'Adım 01 — Hizmet seç',
+      'Adım 02 — Usta seç',
+      'Adım 03 — Tarih & Saat',
+      'Adım 04 — İletişim',
+      'Onay — Tamamlandı'
+    ];
+    const setStep = (n) => {
+      const oldStep = document.querySelector('.booking-step.active');
+      const newStep = document.querySelector(`.booking-step[data-step="${n}"]`);
+      if (!newStep) return;
+      if (oldStep === newStep) return;
+      // out
+      oldStep?.classList.remove('in');
+      setTimeout(() => {
+        oldStep?.classList.remove('active');
+        newStep.classList.add('active');
+        requestAnimationFrame(() => newStep.classList.add('in'));
+      }, reduce ? 0 : 360);
+      state.step = n;
+      // step dots
+      document.querySelectorAll('[data-step-dot]').forEach(d => {
+        const i = +d.dataset.stepDot;
+        d.classList.remove('done', 'current');
+        if (i < n) d.classList.add('done');
+        if (i === n) d.classList.add('current');
+      });
+      document.getElementById('step-label').textContent = stepLabels[n - 1];
+      document.getElementById('step-count').textContent = String(Math.min(n, 4)).padStart(2, '0');
+      // nav buttons
+      const prev = document.getElementById('prev-step');
+      const next = document.getElementById('next-step');
+      const bookingNav = document.getElementById('booking-nav');
+      if (n === 5) { bookingNav.style.display = 'none'; }
+      else { bookingNav.style.display = ''; }
+      if (n <= 1) prev.classList.add('opacity-50', 'pointer-events-none');
+      else prev.classList.remove('opacity-50', 'pointer-events-none');
+      next.textContent = '';
+      const arrow = document.createElement('span');
+      next.append(n === 4 ? 'Randevuyu Onayla' : 'Devam');
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'arrow'); svg.setAttribute('width','14'); svg.setAttribute('height','14'); svg.setAttribute('viewBox','0 0 14 14'); svg.setAttribute('fill','none');
+      svg.innerHTML = '<path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
+      next.appendChild(svg);
+      validate();
+    };
+    const validate = () => {
+      const next = document.getElementById('next-step');
+      let ok = false;
+      if (state.step === 1) ok = !!state.service;
+      else if (state.step === 2) ok = !!state.master;
+      else if (state.step === 3) ok = !!state.date && !!state.time;
+      else if (state.step === 4) ok = !!document.getElementById('b-name').value.trim() && !!document.getElementById('b-phone').value.trim();
+      next.classList.toggle('opacity-40', !ok);
+      next.classList.toggle('pointer-events-none', !ok);
+    };
+
+    // Pick cards
+    document.querySelectorAll('[data-pick]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const kind = btn.dataset.pick;
+        document.querySelectorAll(`[data-pick="${kind}"]`).forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        if (kind === 'service') {
+          state.service = btn.dataset.value;
+          state.duration = btn.dataset.duration;
+          state.price = btn.dataset.price;
+        }
+        if (kind === 'master') state.master = btn.dataset.value;
+        validate();
+      });
+    });
+
+    // Quick jump from service-row & master cards to booking
+    document.querySelectorAll('.service-row').forEach(row => {
+      row.addEventListener('click', (e) => {
+        const v = row.dataset.service;
+        const card = document.querySelector(`[data-pick="service"][data-value="${v}"]`);
+        if (card) card.click();
+        setStep(1);
+      });
+    });
+    document.querySelectorAll('.master-card').forEach(row => {
+      row.addEventListener('click', (e) => {
+        const v = row.dataset.master;
+        // If no service yet, leave at step 1; otherwise jump to step 2
+        const card = document.querySelector(`[data-pick="master"][data-value="${v}"]`);
+        if (card) card.click();
+        if (state.service) setStep(2);
+      });
+    });
+
+    // ——————————————————— Calendar ———————————————————
+    let calMonth = now.getMonth();
+    let calYear = now.getFullYear();
+    const renderCal = () => {
+      const root = document.getElementById('calendar');
+      const label = document.getElementById('cal-month');
+      root.innerHTML = '';
+      label.textContent = `${months[calMonth]} ${calYear}`;
+      const first = new Date(calYear, calMonth, 1);
+      const startDow = (first.getDay() + 6) % 7; // make Monday=0
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      // pad
+      for (let i = 0; i < startDow; i++) {
+        const d = document.createElement('div'); d.className='day-cell disabled';
+        d.textContent = '';
+        root.appendChild(d);
+      }
+      const today = new Date(); today.setHours(0,0,0,0);
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(calYear, calMonth, d);
+        const cell = document.createElement('button');
+        cell.className = 'day-cell';
+        cell.textContent = d;
+        const past = date < today;
+        const tooFar = (date - today) / 86400000 > 60;
+        if (past || tooFar) cell.classList.add('disabled');
+        else {
+          cell.addEventListener('click', () => {
+            document.querySelectorAll('#calendar .day-cell.selected').forEach(c => c.classList.remove('selected'));
+            cell.classList.add('selected');
+            state.date = date;
+            state.time = null;
+            renderSlots(date);
+            const lbl = document.getElementById('day-label');
+            lbl.textContent = `${days[date.getDay()]} · ${d} ${months[calMonth]}`;
+            validate();
+          });
+        }
+        if (date.getTime() === today.getTime()) cell.style.outline = '1px dashed rgba(11,11,11,.3)';
+        root.appendChild(cell);
+      }
+    };
+    const renderSlots = (date) => {
+      const root = document.getElementById('slots');
+      root.innerHTML = '';
+      // Generate hourly + half-hourly slots between 10:00 and 21:30
+      const slots = [];
+      for (let h = 10; h <= 21; h++) {
+        slots.push(`${String(h).padStart(2,'0')}:00`);
+        slots.push(`${String(h).padStart(2,'0')}:30`);
+      }
+      // Deterministic "availability": busier on weekends, mid-day busier
+      const seed = (date.getTime() / 86400000) | 0;
+      slots.forEach((t, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'slot';
+        btn.textContent = t;
+        // pseudo random
+        const rnd = ((seed * 9301 + i * 49297) % 233280) / 233280;
+        const isWeekend = (date.getDay() === 0 || date.getDay() === 6);
+        const busy = isWeekend ? rnd < 0.55 : rnd < 0.3;
+        if (busy) btn.classList.add('disabled');
+        else {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('#slots .slot.selected').forEach(c => c.classList.remove('selected'));
+            btn.classList.add('selected');
+            state.time = t;
+            validate();
+          });
+        }
+        root.appendChild(btn);
+      });
+    };
+    document.getElementById('cal-prev').addEventListener('click', () => {
+      const today = new Date(); today.setDate(1); today.setHours(0,0,0,0);
+      const cur = new Date(calYear, calMonth, 1);
+      if (cur <= today) return;
+      calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
+      renderCal();
+    });
+    document.getElementById('cal-next').addEventListener('click', () => {
+      calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
+      renderCal();
+    });
+    renderCal();
+
+    // ——————————————————— Step nav ———————————————————
+    document.getElementById('next-step').addEventListener('click', () => {
+      if (state.step === 4) {
+        // build summary in confirmation
+        document.getElementById('cf-service').textContent = state.service;
+        document.getElementById('cf-master').textContent = state.master;
+        const d = state.date;
+        document.getElementById('cf-when').textContent = `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} · ${state.time}`;
+        setStep(5);
+        return;
+      }
+      if (state.step === 3) {
+        // populate summary card
+        document.getElementById('sum-service').textContent = state.service || '—';
+        document.getElementById('sum-master').textContent = state.master || '—';
+        const d = state.date;
+        document.getElementById('sum-date').textContent = `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]}`;
+        document.getElementById('sum-time').textContent = state.time;
+        document.getElementById('sum-duration').textContent = state.duration || '—';
+        document.getElementById('sum-total').textContent = state.price || '—';
+      }
+      setStep(state.step + 1);
+    });
+    document.getElementById('prev-step').addEventListener('click', () => {
+      if (state.step > 1) setStep(state.step - 1);
+    });
+    document.getElementById('reset-booking').addEventListener('click', () => {
+      state.service = state.master = state.date = state.time = null;
+      document.querySelectorAll('.pick-card.selected, .day-cell.selected, .slot.selected').forEach(e => e.classList.remove('selected'));
+      ['b-name','b-phone','b-email','b-note'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+      setStep(1);
+    });
+
+    // Form validation re-check
+    ['b-name','b-phone'].forEach(id => document.getElementById(id).addEventListener('input', validate));
+
+    // Init
+    setStep(1);
+  </script>
+</body>
+</html>
